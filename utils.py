@@ -72,10 +72,10 @@ def display_card(title: str, content: str, image_url: str = None):
 
 # Define image arrays with reliable placeholder images
 EDUCATIONAL_IMAGES = [
-    "https://placehold.co/600x400/blue/white?text=Education+1",
-    "https://placehold.co/600x400/green/white?text=Education+2",
-    "https://placehold.co/600x400/orange/white?text=Education+3",
-    "https://placehold.co/600x400/purple/white?text=Education+4"
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWRmwCeGD5Iewh07b4FKZhgImpECSOmxbQSg&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Lddr6wr0pjrVN8yu7-eGixHHp_xlT8ekUg&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzwc6RzcYzjqZD6zTCuGhodLRuURprOVDnbg&s",
+    "https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/asian-boy-student-video-conference-e-learning-with-teacher-classmates-computer-7-1593537117_ver_1.jpg"
 ]
 
 DISASTER_IMAGES = [

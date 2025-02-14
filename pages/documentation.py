@@ -4,37 +4,42 @@ from utils import load_css
 # Page configuration
 st.set_page_config(page_title="Documentation", page_icon="📚", layout="wide")
 
-# Custom CSS for cards
+# Custom CSS for background image and text visibility
 st.markdown("""
 <style>
+/* Background Image */
+.stApp {
+    background: url("https://png.pngtree.com/thumb_back/fh260/background/20240610/pngtree-concept-of-earthquake-or-natural-disaster-image_15746377.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Improved Text Visibility */
+h1, h2, h3, h4, h5, h6, p, .stText {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Card Styling */
 .card {
     padding: 20px;
     border-radius: 10px;
     margin: 10px 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.85); /* Light background for readability */
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
     cursor: pointer;
+    color: black !important;
 }
 .card:hover {
     transform: translateY(-5px);
 }
-.card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    height: 200px;
-    object-fit: cover;
-}
-.content-section {
-    padding: 20px;
-    border-radius: 10px;
-    background: #f8f9fa;
-    margin-top: 20px;
-}
-.quiz-button {
+
+/* Buttons */
+.quiz-button, .stButton > button {
     background-color: #4CAF50;
-    color: white;
+    color: white !important;
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
@@ -42,8 +47,24 @@ st.markdown("""
     font-size: 16px;
     margin-top: 10px;
 }
-.quiz-button:hover {
+.quiz-button:hover, .stButton > button:hover {
     background-color: #45a049;
+}
+
+/* Form Inputs */
+.stTextInput label, .stSelectbox label, .stTextArea label {
+    color: white !important;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Content Sections */
+.content-section {
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.6); /* Dark transparent background */
+    color: white !important;
+    margin-top: 20px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -52,6 +73,7 @@ st.markdown("""
 if 'current_section' not in st.session_state:
     st.session_state.current_section = None
 
+# Function to display card with button
 def display_card_with_button(title, description, image_url, key):
     col1, col2 = st.columns([2, 3])
     with col1:
@@ -62,8 +84,8 @@ def display_card_with_button(title, description, image_url, key):
         if st.button("Learn More", key=key):
             st.session_state.current_section = key
 
-# Main page content
-st.title("Documentation 📚")
+# Main Page Content
+st.title("📚 **Documentation**")
 st.markdown("### Learning Resources and Guides")
 
 col1, col2 = st.columns(2)
@@ -98,153 +120,63 @@ with col2:
         "additional_resources"
     )
 
-# Content sections
+# Content sections with improved visibility
 if st.session_state.current_section:
     st.markdown("---")
-    
-    if st.session_state.current_section == "safety_guides":
-        st.markdown("""
-        ### Detailed Safety Guides 📖
-        
-        #### Earthquake Safety
-        1. **Before an Earthquake**
-           - Secure heavy furniture and objects
-           - Know safe spots in each room
-           - Have an emergency kit ready
+    with st.container():
+        if st.session_state.current_section == "safety_guides":
+            st.markdown("""
+            ### 🛑 **Detailed Safety Guides**  
+            #### 🏠 Earthquake Safety  
+            **Before:** Secure furniture, identify safe spots, have an emergency kit  
+            **During:** Drop, Cover, and Hold On  
+            **After:** Check for injuries, prepare for aftershocks  
+            
+            #### 🔥 Fire Safety  
+            **Prevention:** Install smoke detectors, plan evacuations  
+            **During:** Stay low, feel doors for heat, use stairs  
+            """, unsafe_allow_html=True)
 
-        2. **During an Earthquake**
-           - Drop, Cover, and Hold On
-           - Stay away from windows
-           - If indoors, stay inside
+        elif st.session_state.current_section == "educational_videos":
+            st.markdown("""
+            ### 🎥 **Educational Video Library**  
+            ✅ Disaster Preparedness Basics  
+            ✅ Emergency Response Training  
+            ✅ Safety Drills and Procedures  
+            """, unsafe_allow_html=True)
 
-        3. **After an Earthquake**
-           - Check for injuries
-           - Listen to emergency radio
-           - Be prepared for aftershocks
-
-        #### Fire Safety
-        1. **Prevention**
-           - Install smoke detectors
-           - Create evacuation plan
-           - Keep fire extinguishers ready
-
-        2. **During a Fire**
-           - Stay low to avoid smoke
-           - Feel doors for heat
-           - Use stairs, not elevators
-        """)
-
-    elif st.session_state.current_section == "educational_videos":
-        st.markdown("""
-        ### Educational Video Library 🎥
-        
-        #### Featured Videos
-        1. **Disaster Preparedness Basics**
-           - Understanding Natural Disasters
-           - Basic Safety Protocols
-           - Emergency Kit Preparation
-
-        2. **Emergency Response Training**
-           - First Aid Basics
-           - CPR Techniques
-           - Emergency Communications
-
-        3. **Safety Drills and Procedures**
-           - School Safety Protocols
-           - Workplace Emergency Procedures
-           - Home Safety Measures
-        
-        #### Popular Topics
-        - First Aid Basics
-        - Emergency Evacuation
-        - Natural Disaster Response
-        """)
-
-    elif st.session_state.current_section == "interactive_quizzes":
-        st.markdown("""
-        ### Interactive Learning Quizzes ✏️
-        
-        Test your knowledge with our interactive quizzes:
-        
-        #### Available Quiz Topics:
-        1. **Basic Safety Knowledge**
-           - General Safety Principles
-           - Emergency Procedures
-           - First Aid Basics
-
-        2. **Disaster-Specific Quizzes**
-           - Earthquake Preparedness
-           - Fire Safety
-           - Tornado Safety
-
-        3. **First Aid and Emergency Response**
-           - Basic First Aid
-           - Emergency Protocols
-           - Safety Procedures
-        """)
-        
-        # Try each of these options one at a time until one works
-        if st.button("Start a Quiz Now 🎯", key="start_quiz"):
-            try:
-                # Option 1: Using the display name
-                st.switch_page("Test page")
-            except:
+        elif st.session_state.current_section == "interactive_quizzes":
+            st.markdown("""
+            ### ✏️ **Interactive Quizzes**  
+            ✅ Basic Safety Knowledge  
+            ✅ Disaster-Specific Quizzes  
+            ✅ First Aid and Emergency Response  
+            """, unsafe_allow_html=True)
+            if st.button("🎯 Start a Quiz", key="start_quiz"):
                 try:
-                    # Option 2: Using underscore
-                    st.switch_page("Test_page")
+                    st.switch_page("Test page")
                 except:
                     try:
-                        # Option 3: Using original filename
-                        st.switch_page("_test_page")
+                        st.switch_page("Test_page")
                     except:
-                        # Option 4: Using capitalization
-                        st.switch_page("Test Page")
+                        try:
+                            st.switch_page("_test_page")
+                        except:
+                            st.switch_page("Test Page")
 
-    elif st.session_state.current_section == "additional_resources":
-        st.markdown("""
-        ### Additional Resources and Links 📑
-        
-        #### Emergency Contacts
-        - **Emergency Services:** 911
-        - **Poison Control:** 1-800-222-1222
-        - **Local Emergency Management:** [Find your local office](https://www.fema.gov/locations)
-        
-        #### Useful Links
-        - [FEMA Website](https://www.fema.gov)
-        - [Red Cross Preparedness](https://www.redcross.org)
-        - [Weather Alerts](https://www.weather.gov)
-        
-        #### Mobile Apps
-        1. **Emergency Alert Apps**
-           - FEMA App
-           - Red Cross Emergency
-           - Weather Underground
+        elif st.session_state.current_section == "additional_resources":
+            st.markdown("""
+            ### 📑 **Additional Resources & Emergency Contacts**  
+            ☎️ **Emergency Services:** 911  
+            ☠️ **Poison Control:** 1-800-222-1222  
+            🔗 **Useful Links:** [FEMA](https://www.fema.gov) | [Red Cross](https://www.redcross.org)  
+            """, unsafe_allow_html=True)
 
-        2. **First Aid Apps**
-           - Red Cross First Aid
-           - First Aid by American Heart Association
-           - Emergency First Aid & Treatment Guide
-        """)
-
-# How to Use Resources section
-with st.expander("How to Use Resources 📝"):
+# Expander for tips on using resources
+with st.expander("📝 **How to Use These Resources**"):
     st.markdown("""
-    1. **Browse Categories**
-       - Click on any card to view detailed content
-       - Use the navigation menu for quick access
-    
-    2. **Access Materials**
-       - Download guides for offline use
-       - Watch educational videos
-       - Take interactive quizzes
-    
-    3. **Stay Prepared**
-       - Keep emergency contacts handy
-       - Update your emergency kit regularly
-       - Practice safety drills
-    
-    4. **Get Help**
-       - Use emergency numbers when needed
-       - Contact local authorities
-       - Follow official guidelines
-    """)
+    ✅ **Browse Categories:** Click any card to view content  
+    ✅ **Access Materials:** Download guides, watch videos, take quizzes  
+    ✅ **Stay Prepared:** Keep emergency contacts handy, update emergency kits  
+    ✅ **Get Help:** Use emergency numbers, follow official guidelines  
+    """, unsafe_allow_html=True)

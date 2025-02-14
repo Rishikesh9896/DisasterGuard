@@ -57,11 +57,18 @@ def main():
             layout="wide"
         )
 
-        # Custom CSS
+        # Custom CSS with background image
         st.markdown("""
         <style>
+        .stApp {
+            background-image: url("https://media.istockphoto.com/id/1333043586/photo/tornado-in-stormy-landscape-climate-change-and-natural-disaster-concept.jpg?b=1&s=612x612&w=0&k=20&c=b4GXbWm4-KVxctCtlu3I_TP0YQZoT5g-mOvodnZOvk4=");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
         .getting-started-card {
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.9), rgba(41, 128, 185, 0.9));
             color: white;
             padding: 25px;
             border-radius: 10px;
@@ -82,7 +89,7 @@ def main():
         }
         .stButton > button {
             width: 100%;
-            background-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.8);
             color: white;
             border: none;
             padding: 12px 20px;
@@ -92,7 +99,7 @@ def main():
             margin: 5px 0;
         }
         .stButton > button:hover {
-            background-color: #2980b9;
+            background-color: rgba(41, 128, 185, 0.9);
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
@@ -100,7 +107,7 @@ def main():
             margin-top: 40px;
         }
         .feature-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -109,6 +116,40 @@ def main():
         }
         .feature-card:hover {
             transform: translateY(-5px);
+        }
+        .feature-card h3 {
+            font-weight: 700 !important;
+            font-size: 1.3em !important;
+            color: #2c3e50 !important;
+            text-shadow: none !important;
+            margin-bottom: 10px !important;
+        }
+        .stMarkdown {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        h1, h2, h3 {
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .stChatMessage {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .stChatMessage p {
+            color: black !important;
+            text-shadow: none !important;
+        }
+        .stChatInput {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 10px;
+        }
+        .stExpander {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 10px;
+            margin: 10px 0;
         }
         </style>
         """, unsafe_allow_html=True)
@@ -134,26 +175,24 @@ def main():
             </div>
             """, unsafe_allow_html=True)
 
-            # Quick Access Buttons with improved styling
-            st.markdown("<div style='padding: 10px 0;'>", unsafe_allow_html=True)
+            # Quick Access Buttons
             button_cols = st.columns(4)
             
             with button_cols[0]:
                 if st.button("🎮 Try Simulation", use_container_width=True, key="sim_button"):
-                    st.switch_page("pages/simulations")
+                    st.switch_page("simulations")
             
             with button_cols[1]:
                 if st.button("📚 Read Guides", use_container_width=True, key="guide_button"):
-                    st.switch_page("pages/documentation")
+                    st.switch_page("documentation")
             
             with button_cols[2]:
                 if st.button("✍️ Take Quiz", use_container_width=True, key="quiz_button"):
-                    st.switch_page("pages/_test_page")
+                    st.switch_page("_test_page")
             
             with button_cols[3]:
                 if st.button("👥 Community", use_container_width=True, key="community_button"):
-                    st.switch_page("pages/community")
-            st.markdown("</div>", unsafe_allow_html=True)
+                    st.switch_page("community")
 
             # Features Section
             st.markdown("### Learn About Disasters and Safety! 🌍")
@@ -161,26 +200,26 @@ def main():
 
             with col1:
                 display_card(
-                    "Natural Disasters 🌋",
+                    "**Natural Disasters** 🌋",
                     "Learn about earthquakes, floods, and how to stay safe!",
                     EDUCATIONAL_IMAGES[0]
                 )
 
                 display_card(
-                    "Emergency Response 🚑",
+                    "**Emergency Response** 🚑",
                     "Discover how to help yourself and others during emergencies!",
                     EDUCATIONAL_IMAGES[1]
                 )
 
             with col2:
                 display_card(
-                    "Community Forum 👥",
+                    "**Community Forum** 👥",
                     "Share experiences and learn from others in our community!",
                     EDUCATIONAL_IMAGES[2]
                 )
 
                 display_card(
-                    "Interactive Learning 🎯",
+                    "**Interactive Learning** 🎯",
                     "Fun games and activities to test your knowledge!",
                     EDUCATIONAL_IMAGES[3]
                 )
@@ -227,12 +266,12 @@ def main():
                         st.session_state.messages.append({"role": "user", "content": question})
                         response = get_bot_response(question)
                         st.session_state.messages.append({"role": "assistant", "content": response})
-                        st.experimental_rerun()
+                        st.rerun()
 
             # Clear chat button
             if st.button("Clear Chat 🗑️"):
                 st.session_state.messages = []
-                st.experimental_rerun()
+                st.rerun()
 
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
