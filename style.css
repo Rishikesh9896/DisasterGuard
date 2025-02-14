@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.stButton > button {
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    width: 100%;
+}
+
+.stButton > button:hover {
+    background-color: #2980B9;
+}
+
+.css-1d391kg {
+    padding: 20px;
+}
+
+.stMarkdown p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #34495E;
+    font-family: 'Lato', sans-serif;
+}
+
+.child-friendly-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    height: 20px;
+    border-radius: 10px;
+    background-color: #2ECC71;
+}
+
+.chat-message {
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    background-color: #F8F9FA;
+}
